@@ -7,22 +7,26 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+
     - uses: actions/checkout@v4
 
     - name: Install Java
-      run: sudo apt-get install openjdk-11-jdk -y
+      run: sudo apt-get update && sudo apt-get install openjdk-11-jdk -y
 
-    - name: Download APK
-      run: wget "https://drive.google.com/uc?export=download&id=1-BTwkTg-deXJNDhAdHvlFt9aKKe76DUe" -O game.apk
+    - name: Install gdown
+      run: pip install gdown
+
+    - name: Download APK from Google Drive
+      run: gdown 1-BTwkTg-deXJNDhAdHvlFt9aKKe76DUe -O game.apk
 
     - name: Download apktool
       run: wget https://bitbucket.org/iBotPeaches/apktool/downloads/apktool_2.9.3.jar -O apktool.jar
 
-    - name: Decompile
+    - name: Decompile APK
       run: java -jar apktool.jar d game.apk -o output
 
-    - name: Upload files
+    - name: Upload result
       uses: actions/upload-artifact@v4
       with:
-        name: result
+        name: decompiled-apk
         path: output
