@@ -1,0 +1,28 @@
+name: Decompile APK
+
+on: [push]
+
+jobs:
+  decompile:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v3
+
+    - name: Install Java
+      run: sudo apt-get install openjdk-11-jdk -y
+
+    - name: Download APK
+      run: wget https://drive.google.com/file/d/1-BTwkTg-deXJNDhAdHvlFt9aKKe76DUe/view?usp=drivesdk -O game.apk
+
+    - name: Download apktool
+      run: wget https://bitbucket.org/iBotPeaches/apktool/downloads/apktool_2.9.3.jar -O apktool.jar
+
+    - name: Decompile APK
+      run: java -jar apktool.jar d game.apk -o output
+
+    - name: Upload output
+      uses: actions/upload-artifact@v3
+      with:
+        name: decompiled
+        path: output
