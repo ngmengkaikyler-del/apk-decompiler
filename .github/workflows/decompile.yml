@@ -14,17 +14,16 @@ jobs:
     - name: Install Java
       run: sudo apt-get update && sudo apt-get install -y openjdk-17-jdk
 
-    - name: Install Python + gdown
+    - name: Install Python tools
       run: |
         python3 -m pip install --upgrade pip
         pip install gdown
 
-    - name: Download APK
+    - name: Download APK from Google Drive
       run: gdown "https://drive.google.com/uc?id=1-BTwkTg-deXJNDhAdHvlFt9aKKe76DUe" -O game.apk
 
     - name: Download apktool
-  run: wget https://github.com/iBotPeaches/Apktool/releases/download/v2.9.3/apktool_2.9.3.jar -O apktool.jar
-
+      run: wget https://github.com/iBotPeaches/Apktool/releases/download/v2.9.3/apktool_2.9.3.jar -O apktool.jar
 
     - name: Decompile APK
       run: java -jar apktool.jar d game.apk -o output
