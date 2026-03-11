@@ -23,7 +23,8 @@ jobs:
       run: gdown "https://drive.google.com/uc?id=1-BTwkTg-deXJNDhAdHvlFt9aKKe76DUe" -O game.apk
 
     - name: Download apktool
-      run: wget https://bitbucket.org/iBotPeaches/apktool/downloads/apktool_2.9.3.jar -O apktool.jar
+  run: wget https://github.com/iBotPeaches/Apktool/releases/download/v2.9.3/apktool_2.9.3.jar -O apktool.jar
+
 
     - name: Decompile APK
       run: java -jar apktool.jar d game.apk -o output
